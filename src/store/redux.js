@@ -37,8 +37,6 @@ const todoSlice = createSlice({
 				completed: false,
 			};
 
-			console.log(newTodo);
-
 			state.push(newTodo);
 		},
 		toggleTodo: (state, action) => {
@@ -65,6 +63,12 @@ const todoSlice = createSlice({
 		},
 	},
 });
+
+/**
+ * todoSlice.actions contient les fonctions générées par createSlice.
+ */
+
+export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
 
 /**
  * todoSlice.reducer est une fonction qui va retourner le state modifié par les reducers.
