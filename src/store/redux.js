@@ -1,5 +1,4 @@
-const { createSlice, configureStore } = require("@reduxjs/toolkit");
-
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 /**
  * createSlice est une fonction qui permet de créer un slice.
  * Un slice est un morceau de state dans Redux.
@@ -13,7 +12,13 @@ const todoSlice = createSlice({
 	/**
 	 * initialState est mon état initial, c'est-à-dire la valeur de mon state au démarrage de l'application.
 	 */
-	initialState: [],
+	initialState: [
+		{
+			id: 1,
+			text: "Faire les courses",
+			completed: false,
+		},
+	],
 	/**
 	 * reducers est un objet qui contient les fonctions qui vont modifier l'état de mon application.
 	 */
@@ -28,9 +33,11 @@ const todoSlice = createSlice({
 			 */
 			const newTodo = {
 				id: Date.now(),
-				title: action.payload,
+				text: action.payload,
 				completed: false,
 			};
+
+			console.log(newTodo);
 
 			state.push(newTodo);
 		},
@@ -54,13 +61,14 @@ const todoSlice = createSlice({
 			 * }
 			 */
 			state = state.filter((todo) => todo.id !== action.payload);
+			return state;
 		},
 	},
 });
 
 /**
  * todoSlice.reducer est une fonction qui va retourner le state modifié par les reducers.
- * C'est cette fonction que l'on va passer à notre store.
+ * C'est cette fonction que l'on va passer à notre store
  */
 export const store = configureStore({
 	reducer: {
